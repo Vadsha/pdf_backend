@@ -1,0 +1,17 @@
+categories
+==========
+name
+slug
+
+books
+=====
+name
+cover
+file
+category_id
+slug
+
+downloads
+=========
+book_id
+downloads 
