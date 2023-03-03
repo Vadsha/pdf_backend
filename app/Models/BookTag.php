@@ -10,5 +10,4 @@ class BookTag extends Model
     use HasFactory;
 
     protected $guarded = [];
-
 }

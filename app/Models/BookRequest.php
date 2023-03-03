@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\Book;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class BookRequest extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-    public function books()
+    public function user()
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsTo(User::class);
     }
 }
