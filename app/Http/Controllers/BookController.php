@@ -14,18 +14,18 @@ class BookController extends BaseController
 {
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'author' => 'required',
             'image' => 'required|image|mimes:jpg,png,jpeg',
-            'file' =>'required|mimes:pdf'
+            'file' =>'required',
+            'tags' => 'required',
+            'description' => 'required'
         ]);
         if($validator->fails()){
             return $this->fail($validator->errors(),403);
         }
         // image setup
-
         $imagename =$request->file('image')->getClientOriginalName();
         $filename = $request->file('file')->getClientOriginalName();
 
@@ -41,11 +41,13 @@ class BookController extends BaseController
         );
         // image setup end
         $book = new Book();
-        $book->category_id =rand(1 , 5);
+        $book->category_id =$request->category_id;
         $book->name = $request->name;
         $book->author = $request->author;
         $slug = Str::of($request->name)->slug('-');
         $book->slug = $slug;
+        $book->tags = $request->tags;
+        $book->description = $request->description;
         $book->image = $imagename;
         $book->file = $filename;
         $book->save();
@@ -101,7 +103,6 @@ class BookController extends BaseController
                 $filename
             );
             $book->slug = Str::of($request->name)->slug('-');
-            $book->category_id =rand(1 , 5);
             $book->update($request->all());
             $book->image = $imagename;
             $book->file = $filename;
@@ -128,7 +129,7 @@ class BookController extends BaseController
       }
       public function download(Request $request)
       {
-        $path = public_path('storage/files/' . $request->name);
+        $path = public_path('storage/files/' . $request->book);
         return response()->download($path);
       }
     }

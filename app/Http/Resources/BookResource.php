@@ -16,12 +16,15 @@ class BookResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'category_id' =>$this->category_id,
+            'category' =>$this->category->name,
+            'category_id' => $this->category_id,
             'name' => $this->name,
             'slug' => $this->slug,
             'author' => $this->author,
             'file' =>$this->file,
-            'image' =>$this->image,
+            'image' =>"http://localhost:8000/storage/photos/" . $this->image,
+            'description' => $this->description,
+            'tags' => explode("," , $this->tags),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
