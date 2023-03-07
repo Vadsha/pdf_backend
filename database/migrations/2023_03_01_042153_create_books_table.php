@@ -18,9 +18,11 @@ class CreateBooksTable extends Migration
             $table->integer('category_id');
             $table->string('name');
             $table->string('author');
+            $table->text('description');
             $table->string('image');
             $table->string('file');
             $table->string('slug');
+            $table->string('tags');
             $table->timestamps();
         });
     }

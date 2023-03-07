@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\Tag;
-use App\Models\BookTag;
+use App\Models\Book;
 use App\Models\User;
+use App\Models\BookTag;
+use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +22,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+    // $name = "abc,def,ghi,jkl";
+    // if (str_contains($name , "abc") != false) {
+    //     return 'found';
+    // }
+    // else{
+    //     return "not found";
+    // }
+    // return Category::where(str_contains());
+    // $search = "Crime";
+    // return Book::where("tags" , "LIKE" , "%".$search."%")->get();
 });
-
 // Route::get('/book_tags', function () {
 //     $booktags =Tag::where('id',1)->first()->booktags;
 //     return $booktags;
@@ -30,11 +42,11 @@ Route::get('/', function () {
 //     ]);
 // });
 
-Route::get('/users', function () {
-    return User::all();
-    return User::create([
-        'name' => 'eee',
-        'email' => 'eee@gmail.com',
-        'password' => Hash::make('internet'),
-    ]);
-});
+// Route::get('/users', function () {
+//     return User::all();
+//     return User::create([
+//         'name' => 'eee',
+//         'email' => 'eee@gmail.com',
+//         'password' => Hash::make('internet'),
+//     ]);
+// });
