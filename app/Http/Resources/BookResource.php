@@ -25,7 +25,8 @@ class BookResource extends JsonResource
             'image' =>"http://localhost:8000/storage/photos/" . $this->image,
             'description' => $this->description,
             'tags' => explode("," , $this->tags),
-            'created_at' => $this->created_at,
+            'downloads' => $this->download->downloads,
+            'created_at' => $this->created_at->format('d-m-Y'),
             'updated_at' => $this->updated_at
         ];
     }
