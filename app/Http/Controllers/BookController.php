@@ -18,9 +18,10 @@ class BookController extends BaseController
             'name' => 'required',
             'author' => 'required',
             'image' => 'required|image|mimes:jpg,png,jpeg',
-            'file' =>'required',
+            'file' =>'required|mimes:pdf',
             'tags' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'category_id' => 'required'
         ]);
         if($validator->fails()){
             return $this->fail($validator->errors(),403);

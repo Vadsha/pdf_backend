@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,11 @@ Route::get('/', function () {
 //         'password' => Hash::make('internet'),
 //     ]);
 // });
+
+Route::get('/create', function () {
+    $user = User::first();
+    // $user->assignRole('admin');
+    // return $user->createToken('pdf-collection')->plainTextToken;
+    Role::create(['name' => 'admin']);
+    Role::create(['name' => 'customer']);
+});
