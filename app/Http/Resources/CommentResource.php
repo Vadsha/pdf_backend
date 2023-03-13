@@ -17,10 +17,12 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'user' => $this->user->name,
             'book_id' => $this->book_id,
+            'book' => $this->book->name,
             'comment' => $this->comment,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'created_at' => $this->created_at->format('d-m-Y'),
+            'updated_at' => $this->updated_at->format('d-m-Y')
         ];
     }
 }

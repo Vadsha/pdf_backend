@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
     return view('welcome');
     // $name = "abc,def,ghi,jkl";
     // if (str_contains($name , "abc") != false) {
@@ -43,10 +44,9 @@ Route::get('/', function () {
 // });
 
 // Route::get('/users', function () {
-//     return User::all();
 //     return User::create([
-//         'name' => 'eee',
-//         'email' => 'eee@gmail.com',
+//         'name' => 'Zwe Zar Ni',
+//         'email' => 'zwe@gmail.com',
 //         'password' => Hash::make('internet'),
 //     ]);
 // });

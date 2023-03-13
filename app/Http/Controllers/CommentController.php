@@ -20,8 +20,8 @@ class CommentController extends BaseController
         }
        $comment = new Comment();
        $comment->comment = $request->comment;
-       $comment->user_id = rand(1 , 5);
-       $comment->book_id = rand(1 , 3);
+       $comment->user_id = $request->user_id;
+       $comment->book_id = $request->book_id;
        $comment->save();
        return $this->success(new CommentResource($comment));
     }

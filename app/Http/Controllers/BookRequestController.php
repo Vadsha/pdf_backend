@@ -20,7 +20,7 @@ class BookRequestController extends BaseController
         }
         $bookrequest = new BookRequest();
         $bookrequest->bookrequest = $request->bookrequest;
-        $bookrequest->user_id = rand(1, 5);
+        $bookrequest->user_id = $request->user_id;
         $bookrequest->save();
         return $this->success( new BookRequestResource($bookrequest));
     }

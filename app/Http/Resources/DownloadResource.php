@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BookTagResource extends JsonResource
+class DownloadResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,11 @@ class BookTagResource extends JsonResource
         return [
             'id' => $this->id,
             'book_id' => $this->book_id,
-            'tag_id' => $this->tag_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'book' => $this->book->name,
+            'downloads' => $this->downloads,
+            'created_at' => $this->created_at->format('m-d-Y'),
+            'updated_at' => $this->updated_at->format('m-d-Y')
+
         ];
     }
 }
