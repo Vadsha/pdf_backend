@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookRequestController;
 use App\Http\Controllers\CategoryController;
@@ -36,4 +37,8 @@ Route::post('/bycategory', [BookController::class, 'byCategory']);
 
 Route::post('/bytag', [BookController::class, 'byTag']);
 
+
+Route::post('/register',[AuthController::class, 'register']);
+
 Route::post('/get-comments-by-book' , [CommentController::class , 'commentByBook']);
+

@@ -58,4 +58,3 @@ class CommentController extends BaseController
     }
 }
 
-//Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim, maxime ipsa exercitationem beatae, at sequi tenetur id, vero minus hic illo unde sed odit? Dicta distinctio ducimus molestiae deleniti facilis.
