@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Download;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -52,6 +53,13 @@ class BookController extends BaseController
         $book->image = $imagename;
         $book->file = $filename;
         $book->save();
+
+        if ($book) {
+            $download = new Download();
+            $download->book_id = $book->id;
+            $download->downloads = 0;
+            $download->save();
+        }
         return $this->success(new BookResource($book));
     }
     public function index()
@@ -125,7 +133,11 @@ class BookController extends BaseController
           $filepath = storage_path('app/public/files/'.$filename);
           unlink($imagepath);
           unlink($filepath);
+
+          $download = Download::where('book_id' , $book->id)->get();
+          $download->delete();
           $book->delete();
+
           return $this->response(["message" => "Successfully Deleted"],[],200,true);
       }
       public function download(Request $request)
@@ -133,4 +145,17 @@ class BookController extends BaseController
         $path = public_path('storage/files/' . $request->book);
         return response()->download($path);
       }
+
+      public function byCategory(Request $request)
+      {
+        $books = Book::where('category_id' , $request->id)->get();
+        return $this->success(BookResource::collection($books));
+      }
+
+      public function byTag(Request $request)
+      {
+        $books = Book::where("tags" , "LIKE" , "%".$request->tag."%")->get();
+        return $this->success(BookResource::collection($books));
+      }
+
     }

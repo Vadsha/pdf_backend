@@ -22,6 +22,7 @@ use Spatie\Permission\Models\Role;
 */
 
 Route::get('/', function () {
+
     return view('welcome');
     // $name = "abc,def,ghi,jkl";
     // if (str_contains($name , "abc") != false) {
@@ -44,18 +45,17 @@ Route::get('/', function () {
 // });
 
 // Route::get('/users', function () {
-//     return User::all();
 //     return User::create([
-//         'name' => 'eee',
-//         'email' => 'eee@gmail.com',
+//         'name' => 'Zwe Zar Ni',
+//         'email' => 'zwe@gmail.com',
 //         'password' => Hash::make('internet'),
 //     ]);
 // });
 
 Route::get('/create', function () {
     $user = User::first();
-    // $user->assignRole('admin');
-    // return $user->createToken('pdf-collection')->plainTextToken;
-    Role::create(['name' => 'admin']);
-    Role::create(['name' => 'customer']);
+    $user->assignRole('admin');
+    return $user->createToken('pdf-collection')->plainTextToken;
+    // Role::create(['name' => 'admin']);
+    // Role::create(['name' => 'customer']);
 });

@@ -17,7 +17,9 @@ class BookRequestResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'user' => $this->user->name,
             'bookrequest' => $this->bookrequest,
+            'created_at' => $this->created_at->format('d-m-Y')
         ];
     }
 }

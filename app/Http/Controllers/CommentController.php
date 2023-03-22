@@ -20,7 +20,7 @@ class CommentController extends BaseController
         }
        $comment = new Comment();
        $comment->comment = $request->comment;
-       $comment->user_id = rand(1 , 5);
+       $comment->user_id = $request->user_id;
        $comment->book_id = $request->book_id;
        $comment->save();
        return $this->success(new CommentResource($comment));
@@ -51,4 +51,3 @@ class CommentController extends BaseController
     }
 }
 
-//Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim, maxime ipsa exercitationem beatae, at sequi tenetur id, vero minus hic illo unde sed odit? Dicta distinctio ducimus molestiae deleniti facilis.
