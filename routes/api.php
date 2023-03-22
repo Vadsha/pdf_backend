@@ -35,3 +35,5 @@ Route::post('/downloadbook', [BookController::class, 'download']);
 Route::post('/bycategory', [BookController::class, 'byCategory']);
 
 Route::post('/bytag', [BookController::class, 'byTag']);
+
+Route::post('/get-comments-by-book' , [CommentController::class , 'commentByBook']);

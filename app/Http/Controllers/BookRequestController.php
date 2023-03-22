@@ -26,7 +26,7 @@ class BookRequestController extends BaseController
     }
     public function index()
     {
-        return $this->success(BookRequestResource::collection(BookRequest::all()));
+        return $this->success(BookRequestResource::collection(BookRequest::paginate(2)));
     }
     public function show($id)
     {

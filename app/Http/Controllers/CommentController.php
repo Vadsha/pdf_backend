@@ -27,17 +27,16 @@ class CommentController extends BaseController
     }
     public function index()
     {
-        return $this->success(CommentResource::collection(Comment::all()));
+        return $this->success(CommentResource::collection(Comment::paginate(2)));
     }
     public function show($id)
     {
         try {
-            Comment::where('id', $id)->firstOrFail();
+            $comments = Comment::where('book_id', $id)->paginate(1);
+            return $this->success(CommentResource::collection($comments));
         } catch (Exception $e ) {
             return $this->fail(["message" => $e->getMessage()],404);
         }
-        $comment = new CommentResource(Comment::where('id', $id)->first());
-        return $this->success($comment);
     }
     public function destroy($id)
     {
@@ -48,6 +47,14 @@ class CommentController extends BaseController
         }
         $comment->delete();
         return $this->response(["message" => "successfully Deleted"],[],200,true);
+    }
+
+    public function commentByBook(Request $request)
+    {
+        $comment = Comment::all();
+        // $comment = Comment::where('book_id' , $request->book_id)->get();
+        return $comment;
+        return $this->success(CommentResource::collection($comment));
     }
 }
 
