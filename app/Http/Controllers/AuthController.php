@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     public function register(Request $request)
     {
@@ -17,7 +17,7 @@ class AuthController extends Controller
             'password' => 'required|min:8|string|confirmed|max:16'
         ]);
         if($validator->fails()){
-            return $validator->errors();
+            return $this->fail($validator->errors(), 422);
         }
         $user = new User();
         $user->name = $request->name;
@@ -29,7 +29,38 @@ class AuthController extends Controller
         return response()->json([
             'data' => ['user' => $user, 'token' => $token],
             'errors' => [],
-            'condition' => true
+            'condition' => true,
+            'message' => "အောင်မြင်စွာ စရင်းပေးသွင်းပြီးပါပြီ။"
         ]);
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->fail($validator->errors(), 403);
+        }
+        $user = User::where('email', $request->email)->first();
+        if($user){
+            if(Hash::check($request->password, $user->password))
+            {
+                $token = $user->createToken('pdf-collection')->plainTextToken;
+                return response()->json([
+                    'data' => ['user' => $user, 'token' => $token],
+                    'errors' => [],
+                    'condition' => true,
+                    'message' => "အောင်မြင်စွာ လော့ဂ်အင်ဝင်ပြီးပါပြီ။"
+                ]);
+            }else
+            {
+                return $this->fail(["message" => "စကားဝှက်မှားနေပါသည်။"]);
+            }
+        }else {
+            return $this->fail(['message' => "ယခု အီးမေးလ်ဖြင့် အသုံးပြုထားသူမရှိပါ။"], 404);
+        }
     }
 }

@@ -39,6 +39,7 @@ Route::post('/bytag', [BookController::class, 'byTag']);
 
 
 Route::post('/register',[AuthController::class, 'register']);
+Route::post('/login',[AuthController::class, 'login']);
 
 Route::post('/get-comments-by-book' , [CommentController::class , 'commentByBook']);
 
