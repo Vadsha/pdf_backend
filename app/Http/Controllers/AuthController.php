@@ -30,7 +30,7 @@ class AuthController extends BaseController
             'data' => ['user' => $user, 'token' => $token],
             'errors' => [],
             'condition' => true,
-            'message' => "အောင်မြင်စွာ စရင်းပေးသွင်းပြီးပါပြီ။"
+            'message' => "အောင်မြင်စွာ စာရင်းပေးသွင်းပြီးပါပြီ။"
         ]);
     }
 
@@ -57,7 +57,7 @@ class AuthController extends BaseController
                 ]);
             }else
             {
-                return $this->fail(["message" => "စကားဝှက်မှားနေပါသည်။"]);
+                return $this->fail(["message" => "စကားဝှက်မှားနေပါသည်။"] , 401);
             }
         }else {
             return $this->fail(['message' => "ယခု အီးမေးလ်ဖြင့် အသုံးပြုထားသူမရှိပါ။"], 404);
