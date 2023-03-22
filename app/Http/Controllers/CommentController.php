@@ -27,12 +27,12 @@ class CommentController extends BaseController
     }
     public function index()
     {
-        return $this->success(CommentResource::collection(Comment::paginate(2)));
+        return $this->success(CommentResource::collection(Comment::paginate(4)));
     }
     public function show($id)
     {
         try {
-            $comments = Comment::where('book_id', $id)->paginate(1);
+            $comments = Comment::where('book_id', $id)->paginate(3);
             return $this->success(CommentResource::collection($comments));
         } catch (Exception $e ) {
             return $this->fail(["message" => $e->getMessage()],404);
