@@ -37,5 +37,8 @@ Route::post('/bycategory', [BookController::class, 'byCategory']);
 
 Route::post('/bytag', [BookController::class, 'byTag']);
 
+
 Route::post('/register',[AuthController::class, 'register']);
-// Route::apiResource('login', AuthController::class, 'login');
+
+Route::post('/get-comments-by-book' , [CommentController::class , 'commentByBook']);
+

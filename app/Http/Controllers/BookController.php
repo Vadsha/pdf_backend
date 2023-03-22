@@ -69,12 +69,11 @@ class BookController extends BaseController
     public function show($slug)
     {
         try {
-            Book::where('slug', $slug)->firstOrFail();
+            $book = Book::where('slug' , $slug)->first();
+            return $this->success(new BookResource($book));
         } catch (Exception $e ) {
             return $this->fail(["message" => $e->getMessage()], 404);
         }
-        $book = new BookResource(Book::where('slug', $slug)->first());
-        return $this->success($book);
     }
     public function update(Request $request,$slug)
     {
