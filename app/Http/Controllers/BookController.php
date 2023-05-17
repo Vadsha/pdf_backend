@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Download;
 use Exception;
 use Illuminate\Support\Str;
@@ -28,8 +29,8 @@ class BookController extends BaseController
             return $this->fail($validator->errors(),403);
         }
         // image setup
-        $imagename =$request->file('image')->getClientOriginalName();
-        $filename = $request->file('file')->getClientOriginalName();
+        $imagename = time() . $request->file('image')->getClientOriginalName();
+        $filename = time() . $request->file('file')->getClientOriginalName();
 
         Storage::putFileAs(
             '/public/photos',
@@ -133,28 +134,12 @@ class BookController extends BaseController
           unlink($imagepath);
           unlink($filepath);
 
-          $download = Download::where('book_id' , $book->id)->get();
+          $download = Download::where('book_id' , $book->id)->first();
           $download->delete();
+          $book->comments()->delete();
           $book->delete();
 
           return $this->response(["message" => "Successfully Deleted"],[],200,true);
-      }
-      public function download(Request $request)
-      {
-        $path = public_path('storage/files/' . $request->book);
-        return response()->download($path);
-      }
-
-      public function byCategory(Request $request)
-      {
-        $books = Book::where('category_id' , $request->id)->get();
-        return $this->success(BookResource::collection($books));
-      }
-
-      public function byTag(Request $request)
-      {
-        $books = Book::where("tags" , "LIKE" , "%".$request->tag."%")->get();
-        return $this->success(BookResource::collection($books));
       }
 
     }
