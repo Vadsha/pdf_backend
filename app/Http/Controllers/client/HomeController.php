@@ -35,4 +35,9 @@ class HomeController extends BaseController
         return $this->success(BookResource::collection($books));
     }
 
+    public function getAllBooks()
+    {
+        return $this->success(BookResource::collection(Book::latest()->paginate(6)));
+    }
+
 }
