@@ -24,8 +24,8 @@ class AuthController extends BaseController
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        $user->assignRole('customer');
-        $token = $user->createToken('pdf-collection')->plainTextToken;
+        $user->assignRole('admin');
+        $token = $user->createToken('nerdy-spot')->plainTextToken;
         return response()->json([
             'data' => ['user' => $user, 'token' => $token],
             'errors' => [],
@@ -48,7 +48,7 @@ class AuthController extends BaseController
         if($user){
             if(Hash::check($request->password, $user->password))
             {
-                $token = $user->createToken('pdf-collection')->plainTextToken;
+                $token = $user->createToken('nerdy-spot')->plainTextToken;
                 return response()->json([
                     'data' => ['user' => $user, 'token' => $token],
                     'errors' => [],
