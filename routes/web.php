@@ -1,14 +1,5 @@
 <?php
-
-use App\Models\Tag;
-use App\Models\Book;
-use App\Models\User;
-use App\Models\BookTag;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +44,9 @@ Route::get('/', function () {
 // });
 
 Route::get('/create', function () {
-    $user = User::first();
-    $user->assignRole('admin');
-    return $user->createToken('pdf-collection')->plainTextToken;
+    // $user = User::first();
+    // $user->assignRole('admin');
+    // return $user->createToken('pdf-collection')->plainTextToken;
     // Role::create(['name' => 'admin']);
     // Role::create(['name' => 'customer']);
 });

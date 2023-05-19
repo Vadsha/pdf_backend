@@ -22,6 +22,7 @@ class BookResource extends JsonResource
             'slug' => $this->slug,
             'author' => $this->author,
             'file' =>$this->file,
+            'comments' => $this->whenLoaded('comments'),
             'image' =>"http://localhost:8000/storage/photos/" . $this->image,
             'description' => $this->description,
             'tags' => explode("," , $this->tags),
