@@ -32,9 +32,15 @@ class HomeController extends BaseController
         return $this->success($books);
     }
 
-    public function booksByCategories($category)
+    public function booksByCategory($category)
     {
         $books = Book::where('category_id' , $category)->get();
+        return $this->success(BookResource::collection($books));
+    }
+
+    public function booksByTag($tag)
+    {
+        $books = Book::where('tags' , 'LIKE' , '%'.$tag.'%')->get();
         return $this->success(BookResource::collection($books));
     }
 
