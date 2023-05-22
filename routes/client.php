@@ -14,3 +14,5 @@ Route::get('/get-books-by-download' , [HomeController::class , 'BooksByDownload'
 Route::get('/get-books-by-categories/{categories}' , [HomeController::class , 'booksByCategory']);
 Route::get('/get-books-by-tags/{tag}' , [HomeController::class , 'booksByTag']);
 Route::post('/comment' , [HomeController::class , 'storeComment']);
+Route::get('/download/{filename}' , [HomeController::class , 'downloadPdf']);
+Route::post('/request-book' , [HomeController::class , 'bookRequest']);

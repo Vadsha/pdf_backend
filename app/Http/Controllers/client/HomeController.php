@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Models\Book;
 use App\Models\Comment;
 use App\Models\Category;
+use App\Models\BookRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\TagResource;
 use App\Http\Resources\BookResource;
@@ -13,6 +14,7 @@ use App\Http\Resources\CommentResource;
 use App\Http\Controllers\BaseController;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\BookRequestResource;
 
 class HomeController extends BaseController
 {
@@ -78,6 +80,27 @@ class HomeController extends BaseController
        $comment->book_id = $request->book_id;
        $comment->save();
        return $this->success(new CommentResource($comment));
+    }
+
+    public function downloadPdf($filename)
+    {
+        $file = storage_path('app/public/files/' . $filename);
+        return response()->download($file);
+    }
+
+    public function bookRequest(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'bookrequest' => 'required'
+        ]);
+        if($validator->fails()){
+            return $this->fail($validator->errors(),403);
+        }
+        $bookrequest = new BookRequest();
+        $bookrequest->bookrequest = $request->bookrequest;
+        $bookrequest->user_id = $request->user_id;
+        $bookrequest->save();
+        return $this->success( new BookRequestResource($bookrequest));
     }
 
 }

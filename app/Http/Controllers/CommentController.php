@@ -27,7 +27,7 @@ class CommentController extends BaseController
     }
     public function index()
     {
-        return $this->success(CommentResource::collection(Comment::paginate(4)));
+        return $this->success(CommentResource::collection(Comment::orderBy('id' , 'desc')->paginate(4)));
     }
     public function show($id)
     {
