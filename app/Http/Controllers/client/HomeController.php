@@ -15,6 +15,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\BookRequestResource;
+use App\Models\Download;
 
 class HomeController extends BaseController
 {
@@ -85,6 +86,10 @@ class HomeController extends BaseController
     public function downloadPdf($filename)
     {
         $file = storage_path('app/public/files/' . $filename);
+        $book = Book::where('file' , $filename)->first();
+        $download = Download::where('book_id' , $book->id)->first();
+        $download->downloads++;
+        $download->save();
         return response()->download($file);
     }
 

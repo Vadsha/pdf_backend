@@ -1,0 +1,15 @@
+--2023-06-01 12:14:18--  https://github.com/login/oauth/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Fapi%2Fsign-in-redirect
+Resolving github.com (github.com)... 20.205.243.166
+Connecting to github.com (github.com)|20.205.243.166|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize%3Fredirect_uri%3Dhttp%253A%252F%252Flocalhost%253A8000%252Fapi%252Fsign-in-redirect [following]
+--2023-06-01 12:14:19--  https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize%3Fredirect_uri%3Dhttp%253A%252F%252Flocalhost%253A8000%252Fapi%252Fsign-in-redirect
+Reusing existing connection to github.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘authorize?redirect_uri=http:%2F%2Flocalhost:8000%2Fapi%2Fsign-in-redirect’
+
+           authorize?     [<=>                      ]       0  --.-KB/s               authorize?redirect_ur     [ <=>                     ]  31.13K  --.-KB/s    in 0.05s   
+
+2023-06-01 12:14:19 (620 KB/s) - ‘authorize?redirect_uri=http:%2F%2Flocalhost:8000%2Fapi%2Fsign-in-redirect’ saved [31877]
+

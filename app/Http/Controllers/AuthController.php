@@ -24,7 +24,7 @@ class AuthController extends BaseController
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        $user->assignRole('admin');
+        $user->assignRole('reader');
         $token = $user->createToken('nerdy-spot')->plainTextToken;
         return response()->json([
             'data' => ['user' => $user, 'token' => $token],
